@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Quiz Worker Answer Sniffer",
+  "version": "1.1",
+  "description": "Bắt đáp án WebSocket chạy trong Web Worker",
+  "content_scripts": [
+    {
+      "matches": ["*://*.quiz.com/*"],
+      "js": ["inject.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ]
+}

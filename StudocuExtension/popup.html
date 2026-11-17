@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doc Downloader</title>
+  <link rel="stylesheet" href="popup.css">
+  <script src="translations.js" defer></script>
+  <script src="popup.js" defer></script>
+</head>
+
+<body>
+  <!-- Persistent SVG Definitions -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <defs>
+      <linearGradient id="gemP0" x1="18.447" y1="43.42" x2="52.153" y2="15.004" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#4893FC"/>
+        <stop offset=".27" stop-color="#4893FC"/>
+        <stop offset=".777" stop-color="#969DFF"/>
+        <stop offset="1" stop-color="#BD99FE"/>
+      </linearGradient>
+      <radialGradient id="gemRed" cx="25" cy="6" r="30" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#FC413D"/>
+        <stop offset=".55" stop-color="#FC413D" stop-opacity=".85"/>
+        <stop offset="1" stop-color="#FC413D" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="gemYellow" cx="0" cy="36" r="28" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#FBBC04"/>
+        <stop offset=".5" stop-color="#FFE432" stop-opacity=".85"/>
+        <stop offset="1" stop-color="#FFEE48" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="gemGreen" cx="22" cy="60" r="32" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#00B95C"/>
+        <stop offset=".5" stop-color="#00B95C" stop-opacity=".8"/>
+        <stop offset="1" stop-color="#00B95C" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="gemBlue" cx="54" cy="32" r="34" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#3186FF"/>
+        <stop offset=".6" stop-color="#749BFF" stop-opacity=".75"/>
+        <stop offset="1" stop-color="#3186FF" stop-opacity="0"/>
+      </radialGradient>
+      <clipPath id="gemClip">
+        <path d="M32.447 0c.68 0 1.273.465 1.439 1.125a38.904 38.904 0 001.999 5.905c2.152 5 5.105 9.376 8.854 13.125 3.751 3.75 8.126 6.703 13.125 8.855a38.98 38.98 0 005.906 1.999c.66.166 1.124.758 1.124 1.438 0 .68-.464 1.273-1.125 1.439a38.902 38.902 0 00-5.905 1.999c-5 2.152-9.375 5.105-13.125 8.854-3.749 3.751-6.702 8.126-8.854 13.125a38.973 38.973 0 00-2 5.906 1.485 1.485 0 01-1.438 1.124c-.68 0-1.272-.464-1.438-1.125a38.913 38.913 0 00-2-5.905c-2.151-5-5.103-9.375-8.854-13.125-3.75-3.749-8.125-6.702-13.125-8.854a38.973 38.973 0 00-5.905-2A1.485 1.485 0 010 32.448c0-.68.465-1.272 1.125-1.438a38.903 38.903 0 005.905-2c5-2.151 9.376-5.104 13.125-8.854 3.75-3.749 6.703-8.125 8.855-13.125a38.972 38.972 0 001.999-5.905A1.485 1.485 0 0132.447 0z"/>
+      </clipPath>
+      <g id="geminiOfficialShape" clip-path="url(#gemClip)">
+        <rect width="65" height="65" fill="url(#gemP0)"/>
+        <rect width="65" height="65" fill="url(#gemBlue)"/>
+        <rect width="65" height="65" fill="url(#gemRed)"/>
+        <rect width="65" height="65" fill="url(#gemGreen)"/>
+        <rect width="65" height="65" fill="url(#gemYellow)"/>
+      </g>
+    </defs>
+  </svg>
+
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bami-orange); flex-shrink: 0;">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <div class="title-group">
+          <h1 id="mainTitle">Doc Downloader</h1>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="langToggleBtn" class="lang-btn" title="Switch Language">
+          <span id="langFlag" class="flag-wrapper"><svg class="flag-icon" viewBox="0 0 30 20" width="16" height="11"><rect width="30" height="20" fill="#da251d"/><polygon points="15,4 16.17,7.62 20,7.62 16.9,9.88 18.08,13.5 15,11.25 11.92,13.5 13.1,9.88 10,7.62 13.83,7.62" fill="#ffff00"/></svg></span><span id="langText">VI</span>
+        </button>
+        <button id="popoutBtn" class="header-action-btn" title="Mở cửa sổ rời">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 3h6v6"></path>
+            <path d="M10 14L21 3"></path>
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          </svg>
+        </button>
+        <button id="themeToggleBtn" class="header-action-btn" title="Chuyển sang nền tối" aria-label="Chuyển sang nền tối">
+          <svg id="themeToggleIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <button id="settingsBtn" class="header-action-btn" title="Cài đặt cá nhân hóa">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="mainView" class="main-view">
+      <div class="nav-tabs" id="navTabsContainer" data-active="download" style="display: none;">
+        <div class="nav-tab-indicator" id="navTabIndicator" aria-hidden="true"></div>
+        <button id="tabDownloadBtn" class="nav-tab active" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span id="tabDownloadText">Tải Tài Liệu</span>
+        </button>
+        <button id="tabAIBtn" class="nav-tab" type="button" style="display: none;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
+          <span id="tabAIText">Ask AI</span>
+        </button>
+      </div>
+
+    <!-- Tab 1: Tải tài liệu & Công cụ -->
+    <div id="downloadTabContent" class="tab-pane active">
+      <div class="action-grid">
+      <button id="checkBtn" class="action-btn primary-btn">
+        <div class="icon-circle">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" x2="12" y1="15" y2="3" />
+          </svg>
+        </div>
+        <div class="btn-info">
+          <span class="btn-heading">Tải File PDF</span>
+          <span class="btn-sub">Tự động dàn trang in</span>
+        </div>
+      </button>
+
+      <button id="clearBtn" class="action-btn secondary-btn">
+        <div class="icon-circle">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        </div>
+        <div class="btn-info">
+          <span class="btn-heading">Xem file & Xóa Watermark</span>
+          <span class="btn-sub">Vượt rào cản tài liệu</span>
+        </div>
+      </button>
+    </div>
+
+    <!-- Truy cập & Kết nối -->
+    <div class="support-section">
+      <div class="support-header">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+        </svg>
+        <span id="supportTitle">Truy cập & Kết nối</span>
+      </div>
+      
+      <div class="support-grid">
+        <button id="studocuBtn" class="support-btn">
+          <div class="support-icon-circle studocu-icon">
+            <svg class="support-brand-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="24" rx="6.5" fill="#18181B"/>
+              <path d="M4.5 17.5V7.2C4.5 6.2 5.3 5.4 6.3 5.4C8.2 5.4 10.2 6 12 7C13.8 6 15.8 5.4 17.7 5.4C18.7 5.4 19.5 6.2 19.5 7.2V17.5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 7V18.8" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M4.5 17.5C6.8 16.8 9.4 16.8 12 18.8C14.6 16.8 17.2 16.8 19.5 17.5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="support-btn-info">
+            <span class="support-btn-heading">Studocu VN</span>
+            <span id="studocuSub" class="support-btn-sub">Mở trang chủ</span>
+          </div>
+        </button>
+
+         <button id="scribdBtn" class="support-btn">
+          <div class="support-icon-circle scribd-icon">
+            <svg class="support-brand-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="24" rx="6.5" fill="#047857"/>
+              <path d="M6.5 4.5h7.5l4.5 4.5v10a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-13.5a1 1 0 0 1 1-1z" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M14 4.5v4.5h4.5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 13h6M9 16.5h3.5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="support-btn-info">
+            <span class="support-btn-heading">Scribd.com</span>
+            <span id="scribdSub" class="support-btn-sub">Mở trang chủ</span>
+          </div>
+        </button>
+
+        <button id="slideshareBtn" class="support-btn">
+          <div class="support-icon-circle slideshare-icon">
+            <svg class="support-brand-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="24" rx="6.5" fill="#EA580C"/>
+              <rect x="4" y="4.5" width="16" height="11" rx="1.8" stroke="#FFFFFF" stroke-width="1.8"/>
+              <path d="M10.5 7.8L14.5 10L10.5 12.2V7.8Z" fill="#FFFFFF"/>
+              <path d="M9 19.5H15M12 15.5V19.5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="support-btn-info">
+            <span class="support-btn-heading">SlideShare.net</span>
+            <span id="slideshareSub" class="support-btn-sub">Mở trang chủ</span>
+          </div>
+        </button>
+
+        <button id="vpnBtn" class="support-btn">
+          <div class="support-icon-circle vpn-icon">
+            <svg class="support-brand-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="24" rx="6.5" fill="#F6821F"/>
+              <path d="M12 4.5L6.5 10.5H10.5V19.5L17.5 12H13.5L15 4.5H12Z" fill="#FFFFFF"/>
+            </svg>
+          </div>
+          <div class="support-btn-info">
+            <span id="vpnTitle" class="support-btn-heading">Tải 1.1.1.1</span>
+            <span id="vpnSub" class="support-btn-sub">Vượt chặn mạng</span>
+          </div>
+        </button>
+      </div>
+
+      <div id="vpnGuide" class="vpn-guide">
+        <svg class="vpn-tip-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg> <strong>Lưu ý:</strong> Không nên đăng nhập tài khoản và tải <strong>1.1.1.1</strong> để truy cập phòng trường hợp lỗi đăng nhập/lỗi mạng.
+      </div>
+    </div>
+  </div> <!-- /#downloadTabContent -->
+
+  <!-- Tab 2: Ask AI - Cốc Cốc style -->
+    <div id="aiTabContent" class="tab-pane" style="display: none !important;">
+      <!-- Page Context Badge -->
+      <div class="ai-page-badge" id="aiPageBadge">
+        <div class="ai-page-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="ai-page-info">
+          <span class="ai-page-title" id="aiDocTitle">Đang nhận diện tài liệu...</span>
+          <span class="ai-page-url" id="aiDocUrl">---</span>
+        </div>
+      </div>
+
+      <!-- Main Chat Input Card -->
+      <div class="ai-input-card">
+        <textarea id="aiPromptInput" class="ai-textarea" rows="3" placeholder="Tôi muốn hỏi..."></textarea>
+        
+        <div class="ai-input-footer">
+          <div class="ai-model-select-wrapper">
+            <span class="ai-model-label" id="aiModelLabel">AI model</span>
+            <div class="ai-model-dropdown-container" id="aiModelDropdownContainer">
+              <input type="hidden" id="aiModelSelect" value="gemini">
+              
+              <button type="button" class="ai-model-trigger-btn" id="aiModelTriggerBtn" aria-haspopup="true" aria-expanded="false">
+                <span id="aiModelCurrentIcon" class="ai-model-current-icon">
+                  <svg class="ai-model-logo-svg gemini-icon" viewBox="0 0 65 65" width="15" height="15">
+                    <use href="#geminiOfficialShape"></use>
+                  </svg>
+                </span>
+                <span id="aiModelCurrentName" class="ai-model-current-name">Gemini</span>
+                <svg class="ai-model-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <div class="ai-model-menu" id="aiModelMenu">
+                <div class="ai-model-menu-item" data-value="chatgpt">
+                  <div class="ai-model-menu-item-left">
+                    <svg class="ai-model-logo-svg chatgpt-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                      <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.0993 3.8558L12.5973 8.3829l2.02-1.1638a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.4018-.6818zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.6069 1.4997-2.602-1.4997z"/>
+                    </svg>
+                    <span class="ai-model-menu-name">ChatGPT</span>
+                  </div>
+                  <svg class="ai-model-check-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+
+                <div class="ai-model-menu-item active" data-value="gemini">
+                  <div class="ai-model-menu-item-left">
+                    <svg class="ai-model-logo-svg gemini-icon" viewBox="0 0 65 65" width="16" height="16">
+                      <use href="#geminiOfficialShape"></use>
+                    </svg>
+                    <span class="ai-model-menu-name">Gemini</span>
+                  </div>
+                  <svg class="ai-model-check-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button id="aiSendBtn" class="ai-send-btn" type="button" title="Gửi câu hỏi">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Context Checkbox -->
+      <div class="ai-checkbox-row">
+        <label class="ai-checkbox-label">
+          <input type="checkbox" id="aiIncludeDocCheck" checked>
+          <span class="ai-custom-check"></span>
+          <span id="aiIncludeDocText">Hỏi về tài liệu / trang này</span>
+        </label>
+      </div>
+
+      <!-- Quick Action Chips -->
+      <div class="ai-chips-container">
+        <button id="aiSummarizeBtn" class="ai-chip-btn" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span id="aiSummarizeText">Tóm tắt trang này</span>
+        </button>
+
+        <button id="aiTranslateBtn" class="ai-chip-btn" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+          <span id="aiTranslateText">Dịch trang này sang tiếng Việt</span>
+        </button>
+
+        <button id="aiKeyPointsBtn" class="ai-chip-btn" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
+          <span id="aiKeyPointsText">Ý chính & Điểm thi trọng tâm</span>
+        </button>
+      </div>
+
+      <!-- Quick status toast -->
+      <div id="aiStatusNotice" class="ai-status-notice" style="display: none;"></div>
+
+    </div> <!-- /#aiTabContent -->
+
+    <!-- Shared Footer across tabs -->
+    <footer class="footer-section" style="display: none;"></footer>
+  </div> <!-- /#mainView -->
+
+    <!-- Settings View (Slide-over Sub-screen) -->
+    <div id="settingsView" class="settings-view" style="display: none;">
+      <div class="settings-top-bar">
+        <button id="settingsBackBtn" class="settings-back-btn" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span id="settingsBackText">Quay lại</span>
+        </button>
+        <span class="settings-heading" id="settingsHeaderTitle">Cài đặt cá nhân hóa</span>
+        <div class="settings-top-bar-spacer" aria-hidden="true"></div>
+      </div>
+
+      <div class="settings-content">
+        <!-- Group 1: Cài đặt chung -->
+        <div class="settings-card">
+          <div class="settings-card-head">
+            <span class="settings-card-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="21" x2="4" y2="14"></line>
+                <line x1="4" y1="10" x2="4" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12" y2="3"></line>
+                <line x1="20" y1="21" x2="20" y2="16"></line>
+                <line x1="20" y1="12" x2="20" y2="3"></line>
+                <line x1="1" y1="14" x2="7" y2="14"></line>
+                <line x1="9" y1="8" x2="15" y2="8"></line>
+                <line x1="17" y1="16" x2="23" y2="16"></line>
+              </svg>
+            </span>
+            <span class="settings-card-title" id="stGroupGeneralTitle">Cài Đặt Chung</span>
+          </div>
+
+          <!-- Language Selector Row -->
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <span class="settings-row-label" id="stLanguageLabel">Ngôn ngữ hiển thị</span>
+              <span class="settings-row-sub" id="stLanguageSub">Chọn ngôn ngữ tiện ích</span>
+            </div>
+            <div class="settings-dropdown-wrapper" id="stLanguageContainer">
+              <input type="hidden" id="stLanguage" value="vi">
+              <button type="button" class="settings-dropdown-trigger" id="stLanguageTrigger" aria-haspopup="true" aria-expanded="false">
+                <div class="settings-dropdown-current">
+                  <span class="settings-dropdown-icon" id="stLanguageCurrentIcon">
+                    <svg class="flag-icon" viewBox="0 0 30 20" width="16" height="11"><rect width="30" height="20" fill="#da251d"/><polygon points="15,4 16.17,7.62 20,7.62 16.9,9.88 18.08,13.5 15,11.25 11.92,13.5 13.1,9.88 10,7.62 13.83,7.62" fill="#ffff00"/></svg>
+                  </span>
+                  <span class="settings-dropdown-text" id="stLanguageCurrentName">Tiếng Việt</span>
+                </div>
+                <svg class="settings-dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="settings-dropdown-menu" id="stLanguageMenu">
+                <div class="settings-dropdown-search-box">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                  <input type="text" id="stLanguageSearch" placeholder="Tìm kiếm / Search languages...">
+                </div>
+                <div class="settings-dropdown-list" id="stLanguageList">
+                  <!-- 54 Chrome Web Store languages rendered dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Startup Tab Selector Row -->
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <span class="settings-row-label" id="stStartupTabLabel">Tab mở khi khởi động</span>
+              <span class="settings-row-sub" id="stStartupTabSub">Tab hiển thị khi vừa mở tiện ích</span>
+            </div>
+            <div class="settings-dropdown-wrapper" id="stStartupTabContainer">
+              <input type="hidden" id="stStartupTab" value="last_used">
+              <button type="button" class="settings-dropdown-trigger" id="stStartupTabTrigger" aria-haspopup="true" aria-expanded="false">
+                <div class="settings-dropdown-current">
+                  <span class="settings-dropdown-icon" id="stStartupTabCurrentIcon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  </span>
+                  <span class="settings-dropdown-text" id="stStartupTabCurrentName">Tab gần nhất</span>
+                </div>
+                <svg class="settings-dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="settings-dropdown-menu" id="stStartupTabMenu">
+                <div class="settings-dropdown-item active" data-value="last_used">
+                  <div class="settings-dropdown-item-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span class="settings-dropdown-item-name" id="stStartupTabLast">Tab gần nhất</span>
+                  </div>
+                  <svg class="settings-dropdown-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <div class="settings-dropdown-item" data-value="download">
+                  <div class="settings-dropdown-item-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    <span class="settings-dropdown-item-name" id="stStartupTabDownload">Tải Tài Liệu</span>
+                  </div>
+                  <svg class="settings-dropdown-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Extension Size Selector Row -->
+          <div class="settings-row" id="stPopupWidthRow">
+            <div class="settings-row-info">
+              <span class="settings-row-label" id="stPopupWidthLabel">Điều chỉnh tỉ lệ thu phóng tiện ích</span>
+              <span class="settings-row-sub" id="stPopupWidthSub">Tỷ lệ thu phóng cả hai chiều</span>
+            </div>
+            <div class="settings-pill-group" id="stPopupWidthGroup">
+              <button type="button" class="settings-pill-btn active" data-value="100">100%</button>
+              <button type="button" class="settings-pill-btn" data-value="90">90%</button>
+              <button type="button" class="settings-pill-btn" data-value="80">80%</button>
+            </div>
+          </div>
+
+          <!-- Extension Theme Selector Row -->
+          <div class="settings-row" id="stExtensionThemeRow">
+            <div class="settings-row-info">
+              <span class="settings-row-label" id="stExtensionThemeLabel">Giao diện tiện ích</span>
+              <span class="settings-row-sub" id="stExtensionThemeSub">Chế độ sáng hoặc tối cho popup</span>
+            </div>
+            <div class="settings-pill-group" id="stExtensionThemeGroup">
+              <button type="button" class="settings-pill-btn active" data-value="light" id="stExtThemeLightBtn" title="Nền sáng" aria-label="Nền sáng">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+              </button>
+              <button type="button" class="settings-pill-btn" data-value="dark" id="stExtThemeDarkBtn" title="Nền tối" aria-label="Nền tối">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="settings-row" id="stViewerThemeRow">
+            <div class="settings-row-info">
+              <span class="settings-row-label" id="stViewerThemeLabel">Giao diện trang tải PDF</span>
+              <span class="settings-row-sub" id="stViewerThemeSub">Tông màu nền trang tải tài liệu</span>
+            </div>
+            <div class="settings-pill-group" id="stViewerThemeGroup">
+              <button type="button" class="settings-pill-btn" data-value="light" id="stDocThemeLightBtn" title="Nền sáng" aria-label="Nền sáng">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+              </button>
+              <button type="button" class="settings-pill-btn active" data-value="dark" id="stDocThemeDarkBtn" title="Nền tối" aria-label="Nền tối">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+              </button>
+            </div>
+          </div>
+
+
+
+        </div>
+
+        <!-- Group 2: Trợ lý AI -->
+        <div class="settings-card" style="display: none;">
+          <div class="settings-card-head">
+            <span class="settings-card-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                <circle cx="12" cy="5" r="2"></circle>
+                <path d="M12 7v4"></path>
+                <line x1="8" y1="16" x2="8" y2="16"></line>
+                <line x1="16" y1="16" x2="16" y2="16"></line>
+              </svg>
+            </span>
+            <span class="settings-card-title" id="stGroupAITitle">Trợ lý AI</span>
+          </div>
+
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <span class="settings-row-label" id="stDefaultModelLabel">Mô hình AI mặc định</span>
+              <span class="settings-row-sub" id="stDefaultModelSub">Tự động chọn khi mở tiện ích</span>
+            </div>
+            <div class="settings-dropdown-wrapper" id="stDefaultModelContainer">
+              <input type="hidden" id="stDefaultModel" value="gemini">
+              <button type="button" class="settings-dropdown-trigger" id="stDefaultModelTrigger" aria-haspopup="true" aria-expanded="false">
+                <div class="settings-dropdown-current">
+                  <span class="settings-dropdown-icon" id="stDefaultModelCurrentIcon">
+                    <svg class="dropdown-logo-svg gemini-icon" viewBox="0 0 65 65" width="14" height="14">
+                      <use href="#geminiOfficialShape"></use>
+                    </svg>
+                  </span>
+                  <span class="settings-dropdown-text" id="stDefaultModelCurrentName">Gemini</span>
+                </div>
+                <svg class="settings-dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="settings-dropdown-menu" id="stDefaultModelMenu">
+                <div class="settings-dropdown-item active" data-value="gemini">
+                  <div class="settings-dropdown-item-left">
+                    <svg class="dropdown-logo-svg gemini-icon" viewBox="0 0 65 65" width="14" height="14">
+                      <use href="#geminiOfficialShape"></use>
+                    </svg>
+                    <span class="settings-dropdown-item-name">Gemini</span>
+                  </div>
+                  <svg class="settings-dropdown-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <div class="settings-dropdown-item" data-value="chatgpt">
+                  <div class="settings-dropdown-item-left">
+                    <svg class="dropdown-logo-svg chatgpt-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                      <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.0993 3.8558L12.5973 8.3829l2.02-1.1638a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.4018-.6818zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.6069 1.4997-2.602-1.4997z"/>
+                    </svg>
+                    <span class="settings-dropdown-item-name">ChatGPT</span>
+                  </div>
+                  <svg class="settings-dropdown-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <span class="settings-row-label" id="stLaunchModeLabel">Cách thức mở AI</span>
+              <span class="settings-row-sub" id="stLaunchModeSub">Cửa sổ phụ song song hoặc tab mới</span>
+            </div>
+            <div class="settings-dropdown-wrapper" id="stLaunchModeContainer">
+              <input type="hidden" id="stLaunchMode" value="side_window">
+              <button type="button" class="settings-dropdown-trigger" id="stLaunchModeTrigger" aria-haspopup="true" aria-expanded="false">
+                <div class="settings-dropdown-current">
+                  <span class="settings-dropdown-icon" id="stLaunchModeCurrentIcon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+                  </span>
+                  <span class="settings-dropdown-text" id="stLaunchModeCurrentName">Cửa sổ phụ</span>
+                </div>
+                <svg class="settings-dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="settings-dropdown-menu" id="stLaunchModeMenu">
+                <div class="settings-dropdown-item active" data-value="side_window">
+                  <div class="settings-dropdown-item-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+                    <span class="settings-dropdown-item-name" id="stLaunchModeSide">Cửa sổ phụ</span>
+                  </div>
+                  <svg class="settings-dropdown-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <div class="settings-dropdown-item" data-value="new_tab">
+                  <div class="settings-dropdown-item-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    <span class="settings-dropdown-item-name" id="stLaunchModeTab">Tab mới</span>
+                  </div>
+                  <svg class="settings-dropdown-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-row" id="stSideWidthRow">
+            <div class="settings-row-info">
+              <span class="settings-row-label" id="stSideWidthLabel">Độ rộng cửa sổ phụ</span>
+              <span class="settings-row-sub" id="stSideWidthSub">Chiều rộng hiển thị bên phải</span>
+            </div>
+            <div class="settings-pill-group" id="stSideWidthGroup">
+              <button type="button" class="settings-pill-btn" data-value="400">400px</button>
+              <button type="button" class="settings-pill-btn active" data-value="460">460px</button>
+              <button type="button" class="settings-pill-btn" data-value="520">520px</button>
+            </div>
+          </div>
+
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <span class="settings-row-label" id="stAutoSubmitLabel">Tự động gửi câu hỏi</span>
+              <span class="settings-row-sub" id="stAutoSubmitSub">Tự động bấm Enter sau khi điền prompt</span>
+            </div>
+            <label class="settings-switch">
+              <input type="checkbox" id="stAutoSubmit" checked>
+              <span class="settings-slider"></span>
+            </label>
+          </div>
+
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <span class="settings-row-label" id="stAutoClipboardLabel">Sao lưu vào Clipboard</span>
+              <span class="settings-row-sub" id="stAutoClipboardSub">Luôn tự động copy prompt dự phòng</span>
+            </div>
+            <label class="settings-switch">
+              <input type="checkbox" id="stAutoClipboard" checked>
+              <span class="settings-slider"></span>
+            </label>
+          </div>
+
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <span class="settings-row-label" id="stDefaultIncludeDocLabel">Mặc định hỏi về trang</span>
+              <span class="settings-row-sub" id="stDefaultIncludeDocSub">Tự động tích chọn đính kèm tài liệu</span>
+            </div>
+            <label class="settings-switch">
+              <input type="checkbox" id="stDefaultIncludeDoc" checked>
+              <span class="settings-slider"></span>
+            </label>
+          </div>
+        </div>
+
+
+
+
+        <!-- Reset Settings Button -->
+        <div class="settings-footer-actions">
+          <button type="button" id="stResetBtn" class="settings-reset-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+            </svg>
+            <span id="stResetBtnText">Khôi phục cài đặt gốc</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- QR Modal -->
+  <div id="qrModal" class="qr-modal" style="display: none;">
+    <div class="qr-modal-content">
+      <span class="qr-close">&times;</span>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+</body>
+
+</html>

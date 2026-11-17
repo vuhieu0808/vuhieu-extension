@@ -1,0 +1,145 @@
+body { 
+    background-color: #f6f7fb !important; 
+    margin: 0 !important; 
+    overflow: auto !important; 
+}
+
+body > *:not(#clean-viewer-container) { 
+    display: none !important; 
+}
+
+#clean-viewer-container {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    padding: 30px 0; 
+    z-index: 9999;
+}
+
+.std-page {
+    position: relative !important; 
+    background-color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    margin-bottom: 20px;
+    display: block !important; 
+    overflow: hidden !important; 
+    border: none !important;
+}
+
+.std-page::after {
+    content: "";
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 4px;
+    background-color: white !important; 
+    z-index: 9999; 
+    pointer-events: none;
+}
+
+.layer-bg { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: 1; 
+    pointer-events: none; 
+}
+
+.layer-bg img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    object-position: top center; 
+    display: block; 
+}
+
+.layer-text { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: 10; 
+    overflow: visible !important; 
+}
+
+.layer-text .pc, 
+.layer-text .pc * { 
+    transform: none !important; 
+    overflow: visible !important; 
+    max-width: none !important; 
+    max-height: none !important; 
+}
+
+.banhmi-gated-note {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    z-index: 30 !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 11px 20px !important;
+    background: linear-gradient(135deg, rgba(26, 20, 16, 0.96) 0%, rgba(38, 26, 18, 0.96) 100%) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    color: #FFFFFF !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", "Hiragino Sans", "Yu Gothic UI", "Apple SD Gothic Neo", "Malgun Gothic", "Leelawadee UI", "Nirmala UI", "Segoe UI Historic", "Noto Sans", sans-serif !important;
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+    line-height: 1.45 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    border-bottom: 2px solid #FF6B00 !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+    filter: none !important;
+    opacity: 1 !important;
+    pointer-events: none !important;
+}
+
+@media print {
+    @page { 
+        margin: 0; 
+        size: auto; 
+    }
+    
+    body { 
+        background-color: white !important; 
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    #clean-viewer-container { 
+        position: static !important; 
+        width: 100% !important; 
+        padding: 0 !important; 
+        margin: 0 !important; 
+    }
+    
+    .clean-viewer-bar {
+        display: none !important;
+    }
+    
+    .std-page {
+        margin: 0 !important; 
+        margin-bottom: 0 !important;
+        box-shadow: none !important;
+        page-break-after: always !important;
+        break-after: always !important;
+        border: none !important;
+    }
+
+    .banhmi-gated-note {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}

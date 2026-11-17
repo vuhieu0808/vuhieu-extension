@@ -1,0 +1,321 @@
+buttons:
+request:
+[
+    "room/message",
+    {
+        "roomId": "433037",
+        "message": {
+            "patch": [
+                {
+                    "op": "replace",
+                    "path": "/slideObject",
+                    "value": {
+                        "index": 0,
+                        "type": "Classic",
+                        "question": "buttons",
+                        "answerTime": null,
+                        "revealType": null,
+                        "answers": [
+                            {
+                                "text": "đúng nè",
+                                "isCorrect": true
+                            },
+                            {
+                                "text": "sai",
+                                "isCorrect": false
+                            },
+                            {
+                                "text": "sai",
+                                "isCorrect": false
+                            },
+                            {
+                                "text": "sai",
+                                "isCorrect": false
+                            }
+                        ],
+                        "isNumeric": false,
+                        "funFact": null,
+                        "funFactMedia": null,
+                        "questionVoice": "Charles",
+                        "answerVoice": "Charles",
+                        "id": "b3f024c3-cc11-407f-9bda-28a9743ac5e3"
+                    }
+                }
+            ]
+        }
+    }
+]
+
+answer:
+[
+    "room/message",
+    {
+        "roomId": "630326",
+        "message": {
+            "answer": {
+                "slideIndex": 0,
+                "answer": 2,
+                "progress": 1,
+                "unsubmitted": false,
+                "timestamp": 1784650343866
+            },
+            "serverTimestamp": 1784650344264
+        }
+    }
+]
+
+CheckBoxes:
+request:
+[
+    "room/message",
+    {
+        "roomId": "433037",
+        "message": {
+            "patch": [
+                {
+                    "op": "replace",
+                    "path": "/slideObject",
+                    "value": {
+                        "index": 1,
+                        "type": "CheckBoxes",
+                        "question": "checkbox",
+                        "answerTime": null,
+                        "revealType": null,
+                        "answers": [
+                            {
+                                "text": "đúng 1",
+                                "isCorrect": true
+                            },
+                            {
+                                "text": "đúng 2",
+                                "isCorrect": true
+                            },
+                            {
+                                "text": "sai",
+                                "isCorrect": false
+                            },
+                            {
+                                "text": "sai",
+                                "isCorrect": false
+                            }
+                        ],
+                        "isNumeric": false,
+                        "funFact": null,
+                        "funFactMedia": null,
+                        "questionVoice": "Charles",
+                        "answerVoice": "Charles",
+                        "id": "d782f176-e0b1-46bf-8acb-4569d995ef68"
+                    }
+                }
+            ]
+        }
+    }
+]
+answer:
+[
+    "room/message",
+    {
+        "roomId": "433037",
+        "message": {
+            "answer": {
+                "slideIndex": 1,
+                "answer": [
+                    true,
+                    true,
+                    false,
+                    false
+                ],
+                "progress": 0.015850000000000003,
+                "unsubmitted": false,
+                "timestamp": 1784649769564
+            },
+            "serverTimestamp": 1784649770050
+        }
+    }
+]
+
+reorder:
+request:
+[
+    "room/message",
+    {
+        "roomId": "556120",
+        "message": {
+            "patch": [
+                {
+                    "op": "replace",
+                    "path": "/slideObject",
+                    "value": {
+                        "index": 2,
+                        "type": "Reorder",
+                        "question": "reorder",
+                        "answerTime": null,
+                        "revealType": null,
+                        "answers": [
+                            {
+                                "text": "3 ưu",
+                                "isCorrect": true,
+                                "pos": 2
+                            },
+                            {
+                                "text": "1 thứ ",
+                                "isCorrect": true,
+                                "pos": 0
+                            },
+                            {
+                                "text": "2 tự",
+                                "isCorrect": true,
+                                "pos": 1
+                            },
+                            {
+                                "text": "4 tiên",
+                                "isCorrect": true,
+                                "pos": 3
+                            }
+                        ],
+                        "isNumeric": false,
+                        "funFact": null,
+                        "funFactMedia": null,
+                        "questionVoice": "Charles",
+                        "answerVoice": "Charles",
+                        "id": "b1a3d1ad-4861-4da7-93f4-f3d472022450"
+                    }
+                }
+            ]
+        }
+    }
+]
+
+answer:
+[
+    "room/message",
+    {
+        "roomId": "556120",
+        "message": {
+            "answer": {
+                "slideIndex": 2,
+                "answer": [
+                    0,
+                    1,
+                    3,
+                    2
+                ],
+                "progress": 0.6702666666666741,
+                "unsubmitted": false,
+                "timestamp": 1784650668703
+            },
+            "serverTimestamp": 1784650669061
+        }
+    }
+]
+
+range:
+request:
+[
+    "room/message",
+    {
+        "roomId": "433037",
+        "message": {
+            "patch": [
+                {
+                    "op": "replace",
+                    "path": "/slideObject",
+                    "value": {
+                        "index": 3,
+                        "type": "Range",
+                        "question": "range",
+                        "answerTime": null,
+                        "revealType": null,
+                        "answers": [
+                            {
+                                "text": "36",
+                                "isCorrect": true
+                            },
+                            {
+                                "text": "0,50",
+                                "isCorrect": false
+                            }
+                        ],
+                        "isNumeric": false,
+                        "funFact": null,
+                        "funFactMedia": null,
+                        "questionVoice": "Charles",
+                        "answerVoice": "Charles",
+                        "id": "8b8ffaa7-4da9-437c-93b8-e6ab2aec9519"
+                    }
+                }
+            ]
+        }
+    }
+]
+answer:
+[
+    "room/message",
+    {
+        "roomId": "433037",
+        "message": {
+            "answer": {
+                "slideIndex": 3,
+                "answer": "34",
+                "progress": 0.13159999999999988,
+                "unsubmitted": false,
+                "timestamp": 1784650161008
+            },
+            "serverTimestamp": 1784650161433
+        }
+    }
+]
+
+
+type answer:
+request:
+[
+    "room/message",
+    {
+        "roomId": "433037",
+        "message": {
+            "patch": [
+                {
+                    "op": "replace",
+                    "path": "/slideObject",
+                    "value": {
+                        "index": 4,
+                        "type": "TypeAnswer",
+                        "question": "type answer",
+                        "answerTime": null,
+                        "revealType": null,
+                        "answers": [
+                            {
+                                "text": "đáp Án Đúng",
+                                "isCorrect": true
+                            }
+                        ],
+                        "isNumeric": false,
+                        "funFact": null,
+                        "funFactMedia": null,
+                        "questionVoice": "Charles",
+                        "answerVoice": "Charles",
+                        "id": "c0ae0787-b933-4dd2-b90d-fda5aa8713ba"
+                    }
+                }
+            ]
+        }
+    }
+]
+answer:
+[
+    "room/message",
+    {
+        "roomId": "433037",
+        "message": {
+            "answer": {
+                "slideIndex": 4,
+                "answer": "oke",
+                "progress": 0.2735999999999997,
+                "unsubmitted": false,
+                "timestamp": 1784650250142
+            },
+            "serverTimestamp": 1784650250558
+        }
+    }
+]
